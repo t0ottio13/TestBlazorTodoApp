@@ -1,5 +1,5 @@
-﻿public class TodoItem
+﻿internal class TodoItem
 {
-    public string? Title { get; set; }
-    public bool IsDone { get; set; }
+    internal string? Title { get; set; }
+    internal bool IsDone { get; set; }
 }

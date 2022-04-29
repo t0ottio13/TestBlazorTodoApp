@@ -1,0 +1,41 @@
+﻿@page "/bord"
+
+<h1>掲示板</h1>
+
+<input placeholder="Name" @bind="newPostName" />
+<input placeholder="Text..." @bind="newPostDescription" />
+<button @onclick="AddPost">投稿する</button>
+
+<ul>
+    @foreach(var post in posts)
+    {
+        <li>
+            <p>@post.Name</p>
+            <p>@post.Description</p>
+            <p>@post.CreatedAt</p>
+        </li>
+    }
+</ul>
+
+@code {
+    private List<Post> posts = new();
+
+    private string? newPostName;
+
+    private string? newPostDescription;
+
+    private DateTime newPostCreatedAt;
+
+
+    private void AddPost()
+    {
+        newPostCreatedAt = DateTime.Now;
+
+        if (!string.IsNullOrWhiteSpace(newPostName) && !string.IsNullOrWhiteSpace(newPostName)&& !string.IsNullOrWhiteSpace(newPostDescription))
+        {
+            posts.Add(new Post { Name = newPostName, Description = newPostDescription, CreatedAt = newPostCreatedAt});
+            newPostName = string.Empty;
+            newPostDescription = string.Empty;
+        }
+    }
+}
