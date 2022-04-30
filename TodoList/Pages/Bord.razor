@@ -2,15 +2,25 @@
 
 <h1>掲示板</h1>
 
-<input placeholder="Name" @bind="newPostName" />
-<input placeholder="Text..." @bind="newPostDescription" />
-<button @onclick="AddPost">投稿する</button>
+<ul style="list-style: none;">
+    <li>
+        <input placeholder="Name" @bind="newPostName" />
+    </li>
+    <li>
+        <textarea placeholder="Text..." @bind="newPostDescription" />  
+    </li>
+    <li>
+        <button @onclick="AddPost">投稿する</button>
+    </li>
+</ul>
+
+
 
 <ul>
     @foreach(var post in posts)
     {
         <li>
-            <p>@post.Name</p>
+            <p>@post.Name さん</p>
             <p>@post.Description</p>
             <p>@post.CreatedAt</p>
         </li>
@@ -33,7 +43,12 @@
 
         if (!string.IsNullOrWhiteSpace(newPostName) && !string.IsNullOrWhiteSpace(newPostName)&& !string.IsNullOrWhiteSpace(newPostDescription))
         {
-            posts.Add(new Post { Name = newPostName, Description = newPostDescription, CreatedAt = newPostCreatedAt});
+            posts.Insert(0,new Post { 
+                Name = newPostName,
+                Description = newPostDescription,
+                CreatedAt = newPostCreatedAt
+            });
+
             newPostName = string.Empty;
             newPostDescription = string.Empty;
         }
